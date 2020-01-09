@@ -13,7 +13,7 @@ PREFIX_INDEX = 1
 DESCRIPTION_INDEX = 2
 """
 
-def create_snipet(file):
+def create_snippet(file):
     filename, prefix, description = file
     try:
         code =["\t\t\t" + '"' + line[:-1] + '"' + "\n" for line in open(filename, "r")]
@@ -22,18 +22,21 @@ def create_snipet(file):
         return None
     code = ["\t\t\t"] + code + ["\n"]
     code = ",\n\t\t\t".join(code)
-    snipet = "\t" + '"' + filename + '"' + " : {\n" \
+    snippet = "\t" + '"' + filename + '"' + " : {\n" \
     + "\t\t" + '"' + "prefix" + '"' + " : " + '"' + prefix + '"' + "\n\n" \
     + "\t\t" + '"' + "body" + '"' + " : [\n" + code + "\t\t" + "]" + "\n\n" \
     + "\t\t" + '"' + "description" + '"' + " : " + '"' + description + '"' + "\n\n" \
     + "\t" + "}"
-    return snipet
+    return snippet
 
 
-list_file = input()
+list_file = "list_file.txt"
 
 files = [line[:-1].split(",") for line in open(list_file, "r")]
 
-snipet_list = [create_snipet(file) for file in files]
+snippet_list = [create_snippet(file) for file in files]
 
-snipet = "{\n\n" + "\n\n".join(snipet_list) + "\n\n}"
+snippet = "{\n\n" + "\n\n".join(snippet_list) + "\n\n}"
+with open("snippet.txt", "w") as f:
+    f.write(snippet)
+

@@ -1,0 +1,35 @@
+{
+
+	"test1.py" : {
+		"prefix" : "pre1"
+
+		"body" : [
+			,
+						"print('a')"
+,
+						"for i in range(4):"
+,
+						"    print('abc')"
+,
+			
+		]
+
+		"description" : "des1"
+
+	}
+
+	"test2.py" : {
+		"prefix" : "pre2"
+
+		"body" : [
+			,
+						"a= 4*3*3"
+,
+			
+		]
+
+		"description" : "des2"
+
+	}
+
+}
