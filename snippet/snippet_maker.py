@@ -14,9 +14,10 @@ DESCRIPTION_INDEX = 2
 """
 
 def create_snippet(file):
+    print(*file)
     filename, prefix, description = file
     try:
-        code =["\t\t\t" + '"' + line[:-1] + '"' + "\n" for line in open(filename, "r")]
+        code =["\t\t\t" + '"' + line[:-1] + '"' + "\n" for line in open(filename, "r",encoding="utf-8")]
     except:
         print("something wrong with "+filename)
         return None

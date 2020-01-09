@@ -1,3 +1,6 @@
 BFS.py,BFS,conduct BFS
 input.py,inp,input
 dijkstra.py,dijkstra,conduct dijkstra
+UnionFind.py,UnionFind,UF
+BinaryIndexedTree.py,BIT,BIT
+SegmentTree.py,SegmentTree,SegmentTree
