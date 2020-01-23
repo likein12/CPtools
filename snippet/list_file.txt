@@ -4,3 +4,5 @@ dijkstra.py,dijkstra,conduct dijkstra
 UnionFind.py,UnionFind,UF
 BinaryIndexedTree.py,BIT,BIT
 SegmentTree.py,SegmentTree,SegmentTree
+sample.py,sample,sample
+GridEdge.py,GridEdge,GridEdge
