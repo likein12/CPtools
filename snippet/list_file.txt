@@ -6,3 +6,4 @@ BinaryIndexedTree.py,BIT,BIT
 SegmentTree.py,SegmentTree,SegmentTree
 sample.py,sample,sample
 GridEdge.py,GridEdge,GridEdge
+DualSegmentTree.py,DualSegmentTree,DST
