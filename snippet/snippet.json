@@ -217,6 +217,12 @@
 ,
 						"            self.add(i,l)"
 ,
+						"        self.N0 = 1"
+,
+						"        while self.N0*2 <= self.N:"
+,
+						"            self.N0 *= 2"
+,
 						""
 ,
 						"    def add(self, a, w):"
@@ -255,10 +261,36 @@
 ,
 						""
 ,
+						"    #you can use this function when the BIT has only non-negative values."
+,
+						"    def lower_bound(self, w):"
+,
+						"        if w<=0:"
+,
+						"            return 0"
+,
+						"        x = 0"
+,
+						"        k = self.N0"
+,
+						"        while k>0:"
+,
+						"            if x+k<=self.N:"
+,
+						"                if self.bit[x+k-1]<w:"
+,
+						"                    w-=self.bit[x+k-1]"
+,
+						"                    x+=k"
+,
+						"            k//=2"
+,
+						"        return x"
+,
 			
 		]
 
-		"description" : "BIT"
+		"description" : "BIT unverified(lowerbound)"
 
 	}
 
@@ -505,7 +537,7 @@
 ,
 						"                e_list[z(i,j)].append(z(i,j+1))"
 ,
-						"                e_list[z(i,j+1)].append(z(i,j)"
+						"                e_list[z(i,j+1)].append(z(i,j))"
 ,
 			
 		]
@@ -724,7 +756,7 @@
 			
 		]
 
-		"description" : "LST update RUQ query RMQ"
+		"description" : "LST update RUQ query RMQ unverified"
 
 	}
 
@@ -1009,6 +1041,296 @@
 		]
 
 		"description" : "gcd"
+
+	}
+
+	"Zalgorithm.py" : {
+		"prefix" : "Zalgorithm"
+
+		"body" : [
+			,
+						"def Zalgorithm(S):"
+,
+						"    A = [0]*len(S)"
+,
+						"    A[0] = len(S)"
+,
+						"    i = 1"
+,
+						"    j = 0"
+,
+						"    while i < len(S):"
+,
+						"        while i+j < len(S):"
+,
+						"            if S[j] == S[i+j]:"
+,
+						"                j+=1"
+,
+						"            else:"
+,
+						"                break"
+,
+						"        A[i] = j"
+,
+						"        if j==0:"
+,
+						"            i+=1"
+,
+						"            continue"
+,
+						"        k = 1"
+,
+						"        while i+k<len(S):"
+,
+						"            if k+A[k]<j:"
+,
+						"                A[i+k] = A[k]"
+,
+						"                k+=1"
+,
+						"            else:"
+,
+						"                break"
+,
+						"        i += k"
+,
+						"        j -= k"
+,
+						"    return A"
+,
+			
+		]
+
+		"description" : "Z algorithm"
+
+	}
+
+	"WarshallFloyd.py" : {
+		"prefix" : "WarshallFloyd"
+
+		"body" : [
+			,
+						"INF = float('inf')"
+,
+						"D = [[INF]*N for i in range(N)]"
+,
+						"for i in range(N):"
+,
+						"    for j,d in e_list[i]:"
+,
+						"        D[i][j]=d"
+,
+						""
+,
+						"for k in range(N):"
+,
+						"    for i in range(N):"
+,
+						"        for j in range(N):"
+,
+						"            if D[i][j]>D[i][k]+D[k][j]:"
+,
+						"                D[i][j] = D[i][k]+D[k][j]"
+,
+			
+		]
+
+		"description" : "WarshallFloyd unverified"
+
+	}
+
+	"RollingHash.py" : {
+		"prefix" : "RollingHash"
+
+		"body" : [
+			,
+						"class RollingHash():"
+,
+						"    def __init__(self, s):"
+,
+						"        self.length = len(s)"
+,
+						"        self.base = 1009"
+,
+						"        self.mod = (1 << 127) - 1"
+,
+						"        self.hash = [0] * (self.length + 1)"
+,
+						"        self.pow = [1] * (self.length + 1)"
+,
+						" "
+,
+						"        for i in range(self.length):"
+,
+						"            self.hash[i+1] = (self.hash[i] + ord(s[i])) * self.base % self.mod"
+,
+						"            self.pow[i+1] = self.pow[i] * self.base % self.mod"
+,
+						" "
+,
+						"    def get(self, l, r):"
+,
+						"        t = self.hash[r] - self.hash[l] * self.pow[r-l] % self.mod"
+,
+						"        t = (t + self.mod) % self.mod"
+,
+						"        return t"
+,
+			
+		]
+
+		"description" : "RollingHash"
+
+	}
+
+	"LIS.py" : {
+		"prefix" : "LIS"
+
+		"body" : [
+			,
+						"#weakly increase"
+,
+						"def LIS(L):"
+,
+						"    INF = float('inf')"
+,
+						"    DP = [INF]*(len(L)+1)"
+,
+						""
+,
+						"    def bisect(v):"
+,
+						"        if v<DP[0]:"
+,
+						"            return 0"
+,
+						"        l = 0"
+,
+						"        r = len(L)"
+,
+						"        while r-l>1:"
+,
+						"            if v<DP[(l+r)//2]:"
+,
+						"            #if v<=DP[(l+r)//2]:"
+,
+						"                r = (l+r)//2"
+,
+						"            else:"
+,
+						"                l = (l+r)//2"
+,
+						"        return r"
+,
+						"    "
+,
+						"    for v in L:"
+,
+						"        DP[bisect(v)] = v"
+,
+						"    return DP"
+,
+			
+		]
+
+		"description" : "LIS"
+
+	}
+
+	"factorize.py" : {
+		"prefix" : "factorize"
+
+		"body" : [
+			,
+						"from collections import defaultdict"
+,
+						"def factorize(n):"
+,
+						"    dd = defaultdict()"
+,
+						"    for i in range(2,int(n**0.5)+1):"
+,
+						"        while n%i==0 and n>0:"
+,
+						"            dd[i]+=1"
+,
+						"            n//=i"
+,
+						"    if n>1:"
+,
+						"        dd[n]+=1"
+,
+			
+		]
+
+		"description" : "factorize"
+
+	}
+
+	"EulerTour.py" : {
+		"prefix" : "EulerTour"
+
+		"body" : [
+			,
+						"from collections import deque"
+,
+						""
+,
+						"def EulerTour(vi):"
+,
+						"    INF = float('inf')"
+,
+						"    Q = deque([vi])"
+,
+						"    vs = [vi]"
+,
+						"    depth = [0]"
+,
+						"    min_path_list = [INF]*N #change"
+,
+						"    min_path_list[vi] = 0"
+,
+						"    checked_list = [-1]*N"
+,
+						"    checked_list[vi] = 0"
+,
+						"    count = 1"
+,
+						"    while len(Q)>0:"
+,
+						"        v = Q.pop()"
+,
+						"        if len(v)==1:"
+,
+						"            Q.append((v,0))"
+,
+						"            for v1 in e_list[v]:"
+,
+						"                if checked_list[v1]==-1:"
+,
+						"                    checked_list[v1] = count"
+,
+						"                    count+=1"
+,
+						"                    vs.append(v1)"
+,
+						"                    Q.append(v1)"
+,
+						"                    min_path_list[v1]=min(min_path_list[v1],min_path_list[v]+1)"
+,
+						"                    depth.append(min_path_list[v1])"
+,
+						"        else:"
+,
+						"            vs.append(v[0])"
+,
+						"    return vs, depth, checked_list"
+,
+			
+		]
+
+		"description" : "EulerTour unverified"
 
 	}
 

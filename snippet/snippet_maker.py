@@ -38,6 +38,6 @@ files = [line[:-1].split(",") for line in open(list_file, "r")]
 snippet_list = [create_snippet(file) for file in files]
 
 snippet = "{\n\n" + "\n\n".join(snippet_list) + "\n\n}"
-with open("snippet.txt", "w") as f:
+with open("snippet.json", "w") as f:
     f.write(snippet)
 

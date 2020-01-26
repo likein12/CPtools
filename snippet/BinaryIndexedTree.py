@@ -5,6 +5,9 @@ class BIT:
         self.bit = [0]*self.N
         for i,l in enumerate(L):
             self.add(i,l)
+        self.N0 = 1
+        while self.N0*2 <= self.N:
+            self.N0 *= 2
 
     def add(self, a, w):
         x = a + 1
@@ -24,3 +27,16 @@ class BIT:
                 break        
         return ret
 
+    #you can use this function when the BIT has only non-negative values.
+    def lower_bound(self, w):
+        if w<=0:
+            return 0
+        x = 0
+        k = self.N0
+        while k>0:
+            if x+k<=self.N:
+                if self.bit[x+k-1]<w:
+                    w-=self.bit[x+k-1]
+                    x+=k
+            k//=2
+        return x+1

@@ -2,14 +2,21 @@ BFS.py,BFS,conduct BFS
 input.py,inp,input
 dijkstra.py,dijkstra,conduct dijkstra
 UnionFind.py,UnionFind,UF
-BinaryIndexedTree.py,BIT,BIT
+BinaryIndexedTree.py,BIT,BIT unverified(lowerbound)
 SegmentTree.py,SegmentTree,SegmentTree
 sample.py,sample,sample
 GridEdge.py,GridEdge,GridEdge
 DualSegmentTree.py,DualSegmentTree,DST
-LST_RUQ_RMQ.py,LST_RUQ_RMQ,LST update RUQ query RMQ
+LST_RUQ_RMQ.py,LST_RUQ_RMQ,LST update RUQ query RMQ unverified
 StarrySkyTree.py,StarrySkyTree,StarrySkyTree
 submission.py,submission,submission
 BellmanFord.py,BellmanFord,BellmanFord
 eratosthenes.py,eratosthenes,eratosthenes
 gcd.py,gcd,gcd
+Zalgorithm.py,Zalgorithm,Z algorithm
+WarshallFloyd.py,WarshallFloyd,WarshallFloyd unverified
+RollingHash.py,RollingHash,RollingHash
+LIS.py,LIS,LIS
+factorize.py,factorize,factorize
+EulerTour.py,EulerTour,EulerTour unverified
+compression.py,compression,compression

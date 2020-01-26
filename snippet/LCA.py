@@ -1,3 +1,32 @@
+from collections import deque
+
+INF = float('inf')
+
+def EulerTour(vi):
+    Q = deque([vi])
+    vs = [vi]
+    depth = [0]
+    min_path_list = [INF]*N #change
+    min_path_list[vi] = 0
+    checked_list = [-1]*N
+    checked_list[vi] = 0
+    count = 1
+    while len(Q)>0:
+        v = Q.pop()
+        if len(v)==1:
+            Q.append((v,0))
+            for v1 in e_list[v]:
+                if checked_list[v1]==-1:
+                    checked_list[v1] = count
+                    count+=1
+                    vs.append(v1)
+                    Q.append(v1)
+                    min_path_list[v1]=min(min_path_list[v1],min_path_list[v]+1)
+                    depth.append(min_path_list[v1])
+        else:
+            vs.append(v[0])
+    return vs, depth, checked_list
+
 class SegmentTree:
     def __init__(self, L, op, ide):
         self.op = op
@@ -44,7 +73,7 @@ class SegmentTree:
         res = self.ide
         n = self.n
         if self.sz <= r or 0 > l:
-            print('ERROR: the indice are wrong.')
+            print("error")
             return False
 
         for i in range(self.s):
@@ -87,6 +116,10 @@ class SegmentTree:
             n1 = n1//2
         return res
     
-ST = SegmentTree(range(100000),lambda a,b:a+b,0)
-for i in range(10**5):
-    ST.add(i,1)
+vs,depth,id = EulerTour(vi)
+
+ST = SegmentTree(depth, min, INF)
+
+def LCA(x,y):
+    return vs[ST.get_min_index(x,y)]
+# segment tree index is needed
