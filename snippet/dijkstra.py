@@ -4,7 +4,7 @@
 import heapq
 
 vi = 0
-INF = float("inf")
+INF = float('inf')
 min_d_list = [INF]*N
 min_d_list[vi] = 0
 prev_list = [-1]*N

@@ -1,7 +1,7 @@
 from collections import deque
 
 vi = 0  #change
-INF = float("inf")
+INF = float('inf')
 
 Q = deque([vi])
 
