@@ -1,12 +1,20 @@
+from collections import deque
+
 class UnionFind():
     def __init__(self,size):
         self.table = [-1 for _  in range(size)]
         self.member_num = [1 for _ in range(size)]
  
     #representative
+    #O(a(N))
     def find(self,x):
+        Q = deque()
         while self.table[x] >= 0:
+            Q.append(x)
             x = self.table[x]
+        while len(Q)>0:
+            y = Q.pop()
+            self.table[y] = x
         return x
 
     def union(self,x,y):
