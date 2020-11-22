@@ -1655,7 +1655,7 @@
 ,
 						"                    Q.appendleft((x1,y1))"
 ,
-						"                    min_path_list[x1][y1]=min_path_list[x][y]+"
+						"                    min_path_list[x1][y1]=min_path_list[x][y]+1"
 ,
 			
 		]
