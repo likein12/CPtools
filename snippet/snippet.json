@@ -127,6 +127,10 @@
 
 		"body" : [
 			,
+						"from collections import deque"
+,
+						""
+,
 						"class UnionFind():"
 ,
 						"    def __init__(self,size):"
@@ -139,11 +143,23 @@
 ,
 						"    #representative"
 ,
+						"    #O(a(N))"
+,
 						"    def find(self,x):"
+,
+						"        Q = deque()"
 ,
 						"        while self.table[x] >= 0:"
 ,
+						"            Q.append(x)"
+,
 						"            x = self.table[x]"
+,
+						"        while len(Q)>0:"
+,
+						"            y = Q.pop()"
+,
+						"            self.table[y] = x"
 ,
 						"        return x"
 ,
@@ -285,7 +301,7 @@
 ,
 						"            k//=2"
 ,
-						"        return x"
+						"        return x+1"
 ,
 			
 		]
@@ -343,7 +359,7 @@
 ,
 						"        k = a+self.n-1"
 ,
-						"        self.node[k] += x"
+						"        self.node[k] = self.op(x, self.node[k])"
 ,
 						"        for i in range(1000):"
 ,
@@ -391,7 +407,7 @@
 ,
 						"        if self.sz <= r or 0 > l:"
 ,
-						"            print("ERROR: the indice are wrong.")"
+						"            print('ERROR: the indice are wrong.')"
 ,
 						"            return False"
 ,
@@ -495,11 +511,13 @@
 
 		"body" : [
 			,
-						"with open("D://likein12//CP//test//input.txt","w") as f:"
+						"def sample(S):"
 ,
-						"    for s in S:"
+						"    with open('D://likein12//CP//test//input.txt','w') as f:"
 ,
-						"        f.write(s + "/n/r")"
+						"        for s in S:"
+,
+						"            f.write(s + '/n/r')"
 ,
 			
 		]
@@ -525,7 +543,7 @@
 ,
 						"        if i!=H-1:"
 ,
-						"            if S[i][j]=="." and S[i+1][j]==".":"
+						"            if S[i][j]=='.' and S[i+1][j]=='.':"
 ,
 						"                e_list[z(i,j)].append(z(i+1,j))"
 ,
@@ -533,7 +551,7 @@
 ,
 						"        if j!=W-1:"
 ,
-						"            if S[i][j]=="." and S[i][j+1]==".":"
+						"            if S[i][j]=='.' and S[i][j+1]=='.':"
 ,
 						"                e_list[z(i,j)].append(z(i,j+1))"
 ,
@@ -1261,6 +1279,8 @@
 ,
 						"        dd[n]+=1"
 ,
+						"    return d"
+,
 			
 		]
 
@@ -1331,6 +1351,316 @@
 		]
 
 		"description" : "EulerTour unverified"
+
+	}
+
+	"compression.py" : {
+		"prefix" : "compression"
+
+		"body" : [
+			,
+						"from collections import defaultdict"
+,
+						"def compression(A):"
+,
+						"    B = sorted(A)"
+,
+						"    atoi = defaultdict(int)"
+,
+						"    itoa = []"
+,
+						"    prev = -float('inf')"
+,
+						"    count = 0"
+,
+						"    for i in range(N):"
+,
+						"        if prev < B[i]:"
+,
+						"            itoa.append(B[i])"
+,
+						"            atoi[B[i]] = count"
+,
+						"            prev = B[i]"
+,
+						"            count+=1"
+,
+						"    return atoi,itoa"
+,
+			
+		]
+
+		"description" : "compression"
+
+	}
+
+	"fraction.py" : {
+		"prefix" : "fraction"
+
+		"body" : [
+			,
+						"class Fraction:"
+,
+						""
+,
+						"    gcd_dict = {}"
+,
+						""
+,
+						"    def gcd(self, a ,b):"
+,
+						"        if a<b:"
+,
+						"            a,b = b,a"
+,
+						""
+,
+						"        if (a,b) in Fraction.gcd_dict:"
+,
+						"            return Fraction.gcd_dict[(a,b)]"
+,
+						""
+,
+						"        a0,b0 = a,b"
+,
+						"        while a%b!=0:"
+,
+						"            a,b = b,a%b"
+,
+						"        Fraction.gcd_dict[(a0,b0)] = b "
+,
+						"        return b"
+,
+						" "
+,
+						"    def frac(self,a,b, gcd_flag = True):"
+,
+						"        if a==0 and b==0:"
+,
+						"            return (0,0)"
+,
+						"        elif a==0:"
+,
+						"            return (0,1)"
+,
+						"        elif b==0:"
+,
+						"            return (1,0)"
+,
+						"        else:"
+,
+						"            if gcd_flag:"
+,
+						"                d = self.gcd(abs(a),abs(b))"
+,
+						"            else:"
+,
+						"                d = 1"
+,
+						"            if b<0:"
+,
+						"                a,b = -a,-b"
+,
+						"            return (a//d,b//d)"
+,
+						"    "
+,
+						"    def __init__(self, a, b, gcd_flag = True):"
+,
+						"        self.value = self.frac(a,b,gcd_flag)"
+,
+						" "
+,
+						"    def v(self):"
+,
+						"        return self.value"
+,
+						" "
+,
+						"    def __lt__(self, other):"
+,
+						"        assert self.value!=(0,0) and other.value!=(0,0), 'value (0,0) cannot be compared.'"
+,
+						"        a,b = self.value"
+,
+						"        c,d = other.value"
+,
+						"        return a*d < b*c"
+,
+						"    "
+,
+						"    def __le__(self, other):"
+,
+						"        assert self.value!=(0,0) and other.value!=(0,0), 'value (0,0) cannot be compared.'"
+,
+						"        a,b = self.value"
+,
+						"        c,d = other.value"
+,
+						"        return a*d <= b*c"
+,
+						" "
+,
+						"    def __eq__(self, other):"
+,
+						"        a,b = self.value"
+,
+						"        c,d = other.value"
+,
+						"        return a==c and b==d"
+,
+						" "
+,
+						"    def __ne__(self, other):"
+,
+						"        a,b = self.value"
+,
+						"        c,d = other.value"
+,
+						"        return not (a==c and b==d)"
+,
+						" "
+,
+						"    def __gt__(self, other):"
+,
+						"        assert self.value!=(0,0) and other.value!=(0,0), 'value (0,0) cannot be compared.'"
+,
+						"        a,b = self.value"
+,
+						"        c,d = other.value"
+,
+						"        return a*d > b*c"
+,
+						" "
+,
+						"    def __ge__(self, other):"
+,
+						"        assert self.value!=(0,0) and other.value!=(0,0), 'value (0,0) cannot be compared.'"
+,
+						"        a,b = self.value"
+,
+						"        c,d = other.value"
+,
+						"        return a*d >= b*c"
+,
+						" "
+,
+						"    def __add__(self, other):"
+,
+						"        a,b = self.value"
+,
+						"        c,d = other.value"
+,
+						"        return Fraction(a*d + b*c, b*d)"
+,
+						"        "
+,
+						"    def __sub__(self, other):"
+,
+						"        a,b = self.value"
+,
+						"        c,d = other.value"
+,
+						"        return Fraction(a*d - b*c, b*d)"
+,
+						" "
+,
+						"    def __mul__(self, other):"
+,
+						"        a,b = self.value"
+,
+						"        c,d = other.value"
+,
+						"        return Fraction(a*c, b*d)"
+,
+						" "
+,
+						"    def __truediv__(self, other):"
+,
+						"        a,b = self.value"
+,
+						"        c,d = other.value"
+,
+						"        return Fraction(a*d, b*c)"
+,
+						"    "
+,
+						"    def __neg__(self):"
+,
+						"        a,b = self.value"
+,
+						"        return Fraction(-a,b,True)"
+,
+						"        "
+,
+						"    def inv(self):"
+,
+						"        a,b = self.value"
+,
+						"        return Fraction(b,a,True)"
+,
+						""
+,
+						"    def show(self):"
+,
+						"        a,b = self.value"
+,
+						"        print('Fraction('+str(a)+'/'+str(b)+')')"
+,
+			
+		]
+
+		"description" : "fraction"
+
+	}
+
+	"GridBFS.py" : {
+		"prefix" : "GridBFS"
+
+		"body" : [
+			,
+						"from collections import deque"
+,
+						""
+,
+						"INF = float('inf')"
+,
+						""
+,
+						"Q = deque([vi])"
+,
+						""
+,
+						"min_path_list = [[INF]*W for i in range(H)] "
+,
+						"x,y = start"
+,
+						"min_path_list[x][y] = 0"
+,
+						"nxt = [(0,1),(0,-1),(1,0),(-1,0)]"
+,
+						"while len(Q)>0:"
+,
+						"    x,y = Q.pop()"
+,
+						"    for dx,dy in nxt:"
+,
+						"        x1 = x+dx"
+,
+						"        y1 = y+dy"
+,
+						"        if 0<=x1<H and 0<=y1<W:                  "
+,
+						"                if min_path_list[x1][y1]>=INF and S[x1][y1]!='#':"
+,
+						"                    Q.appendleft((x1,y1))"
+,
+						"                    min_path_list[x1][y1]=min_path_list[x][y]+"
+,
+			
+		]
+
+		"description" : "GridBFS"
 
 	}
 

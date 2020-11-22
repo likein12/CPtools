@@ -20,7 +20,7 @@ class SegmentTree:
     
     def add(self, a, x):
         k = a+self.n-1
-        self.node[k] += x
+        self.node[k] = self.op(x, self.node[k])
         for i in range(1000):
             k = (k-1)//2
             self.node[k] = self.op(self.node[2*k+1], self.node[2*k+2])

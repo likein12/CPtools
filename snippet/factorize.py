@@ -7,3 +7,4 @@ def factorize(n):
             n//=i
     if n>1:
         dd[n]+=1
+    return dd
